@@ -20,8 +20,10 @@ dDELETE_ITEM(log_entry);
 extern log_entry* log_entries;
 extern size_t nTicks;
 
+void add_message_copy(const strBuf* mess, const size_t time);
 void add_message(const strBuf* mess, const size_t time);
 size_t getCurrentLength();
+size_t getCurrentDepth();
 
 void registerMemoryGet(size_t size);
 
@@ -34,13 +36,13 @@ void log_free(void* entry);
 
 #define LOG_CLIENT_E(message,pespconn,err)  {\
                                             char buf[512];\
-                                            os_sprintf(buf,message ": %u.%u.%u.%u:%u %u\n",\
+                                            os_sprintf(buf,message ": %u.%u.%u.%u:%u %d\n",\
                                                             pespconn->proto.tcp->remote_ip[0],\
                                                             pespconn->proto.tcp->remote_ip[1],\
                                                             pespconn->proto.tcp->remote_ip[2],\
                                                             pespconn->proto.tcp->remote_ip[3],\
                                                             pespconn->proto.tcp->remote_port,\
-                                                            err\
+                                                            (size_t)err\
                                                       );\
                                           add_log_buffer(buf);\
                                       }

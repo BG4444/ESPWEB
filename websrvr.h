@@ -11,6 +11,11 @@
 #include "tcp_streamer.h"
 #include "strbuf.h"
 
+MAKE_STR_BUF(status200,"200 OK");
+MAKE_STR_BUF(status404,"Not Found");
+MAKE_STR_BUF(status500," InternalServerError");
+
+
 typedef struct _param
 {
     strBuf name;
@@ -18,8 +23,8 @@ typedef struct _param
 } Param;
 
 
-extern tcp_streamer* streamsOut;
-extern tcp_streamer* streamsInp;
+extern  tcp_streamer* streamsOut;
+extern  tcp_streamer* streamsInp;
 
 static const unsigned short m1=(unsigned short int)(-1);
 

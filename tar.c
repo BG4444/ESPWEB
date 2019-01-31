@@ -87,7 +87,9 @@ void send_item(tcp_streamer *s)
     uint32* buf=(uint32*)log_malloc(size);
 
     vaddr_flash_read512(s->pos, buf, size );
-    espconn_sent(s->pCon, (char*)buf,size);
+//    os_printf("send tar item");
+    current_sending=s->pEspCon;
+    espconn_sent(s->pEspCon, (char*)buf,size);
 
     s->pos+=size;
     if(s->pos==s->tail)

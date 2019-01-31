@@ -15,7 +15,7 @@
 
 #define DELETE_ITEM(type)  dDELETE_ITEM(type)\
                            {\
-                                for(;*current!=item;current=& (*current)->next);\
+                                for(;*current && *current!=item;current=& ((*current)->next));\
                                 *current=(*current)->next;\
                                 os_free(item);\
                            }
